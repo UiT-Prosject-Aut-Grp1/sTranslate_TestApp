@@ -70,10 +70,6 @@
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpYaml">
-      <HintPath>..\packages\FSharp.Configuration.0.5.12\lib\net40\SharpYaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="sTranslate.Model">
       <HintPath>..\..\..\sTranslate\sTranslate.Tools\bin\Debug\sTranslate.Model.dll</HintPath>
     </Reference>
@@ -84,7 +80,7 @@
       <HintPath>..\..\..\sTranslate_direct\sTranslate_direct\bin\Debug\sTranslate_direct.dll</HintPath>
     </Reference>
     <Reference Include="sTranslate_fs">
-      <HintPath>..\..\..\sTranslate_fs\sTranslate_fs\bin\Debug\sTranslate_fs.dll</HintPath>
+      <HintPath>..\..\..\sTranslate_fs\sTranslate_fs\bin\Release\sTranslate_fs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
