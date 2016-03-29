@@ -1,0 +1,3 @@
+- Større nummere i y akse
+- Streker i y akse
+- Definer ms (alle grafer)
