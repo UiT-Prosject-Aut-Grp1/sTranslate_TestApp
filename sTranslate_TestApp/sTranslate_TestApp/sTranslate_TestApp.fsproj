@@ -108,6 +108,9 @@
     <Reference Include="sTranslate_fs">
       <HintPath>..\..\..\sTranslate_fs\sTranslate_fs\bin\Release\sTranslate_fs.dll</HintPath>
     </Reference>
+    <Reference Include="sTranslate_parallel">
+      <HintPath>..\..\..\sTranslate_parallell\sTranslate_parallell\bin\Release\sTranslate_parallel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />

@@ -34,7 +34,7 @@ let StressTestCsToText fileName numLoops =
         // Track completion
         let pctComplete = Math.Floor (float i)/(float numLoops)*100.0
         let elapsedTime = DateTime.Now.Subtract(startTime) 
-        printf "\r%i%%, completed" (int pctComplete)
+        printf "\r%i%% completed, " (int pctComplete)
         printRemainingTime pctComplete elapsedTime
     printfn ""
     // Time the entire stresstest

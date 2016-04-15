@@ -10,6 +10,7 @@ let logFileFSharpDirectNoCache = __SOURCE_DIRECTORY__ + @"\logFSharpDirectNoCach
 let logFileFSharpDirectCache = __SOURCE_DIRECTORY__ + @"\logFSharpDirectWithCache.csv"
 let logFileFSharpNoCache = __SOURCE_DIRECTORY__ + @"\logFSharpNoCache.csv"
 let logFileFSharpCache = __SOURCE_DIRECTORY__ + @"\logFSharpWithCache.csv"
+let logFileFSharpParallel = __SOURCE_DIRECTORY__ + @"\logFSharpParallel.csv"
 
 let testFile = __SOURCE_DIRECTORY__ + @"\StressTest.csv"
 
@@ -22,8 +23,8 @@ let main argv =
     
 //    let (searchCounter,elapsedTime,loopTimes) = StressTestCsGetToText fileName numLoops
 //    let logFile = logFileCSharpNoCache
-    let (searchCounter,elapsedTime,loopTimes) = StressTestCsToText fileName numLoops
-    let logFile = logFileCSharpCache
+//    let (searchCounter,elapsedTime,loopTimes) = StressTestCsToText fileName numLoops
+//    let logFile = logFileCSharpCache
 //    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_direct.XltTool.GetToText sTranslate_direct.XltEnums.ToPropertyType sTranslate_direct.XltEnums.ToCriteria fileName numLoops
 //    let logFile = logFileFSharpDirectNoCache
 //    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_direct.XltTool.ToText sTranslate_direct.XltEnums.ToPropertyType sTranslate_direct.XltEnums.ToCriteria fileName numLoops
@@ -32,6 +33,8 @@ let main argv =
 //    let logFile = logFileFSharpNoCache
 //    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_fs.XltTool.ToText sTranslate_fs.XltEnums.ToPropertyType sTranslate_fs.XltEnums.ToCriteria fileName numLoops
 //    let logFile = logFileFSharpCache
+    let (searchCounter,elapsedTime,loopTimes) = StressTestFsParallel fileName numLoops
+    let logFile = logFileFSharpParallel
 
 //    let fromText = "Edit"
 //    let context = "lblTitle"
