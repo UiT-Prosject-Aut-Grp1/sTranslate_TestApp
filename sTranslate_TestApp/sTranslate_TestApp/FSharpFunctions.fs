@@ -33,7 +33,9 @@ let StressTest translateFunction propertyFunction criteriaFunction fileName numL
         loopTimes <- addToList loopTimes (DateTime.Now.Subtract(loopStartTime))
         // Track completion
         let pctComplete = Math.Floor (float i)/(float numLoops)*100.0
-        printf "\r%i%%" (int pctComplete)
+        let elapsedTime = DateTime.Now.Subtract(startTime) 
+        printf "\r%i%%, completed" (int pctComplete)
+        printRemainingTime pctComplete elapsedTime
     printfn ""
     
     // Time the entire stresstest

@@ -33,7 +33,9 @@ let StressTestCsToText fileName numLoops =
         loopTimes <- addToList loopTimes (DateTime.Now.Subtract(loopStartTime))
         // Track completion
         let pctComplete = Math.Floor (float i)/(float numLoops)*100.0
-        printf "\r%i%%" (int pctComplete)
+        let elapsedTime = DateTime.Now.Subtract(startTime) 
+        printf "\r%i%%, completed" (int pctComplete)
+        printRemainingTime pctComplete elapsedTime
     printfn ""
     // Time the entire stresstest
     let elapsedTime = DateTime.Now.Subtract(startTime) 
@@ -68,7 +70,9 @@ let StressTestCsGetToText fileName numLoops =
         loopTimes <- addToList loopTimes (DateTime.Now.Subtract(loopStartTime))
         // Track completion
         let pctComplete = Math.Floor (float i)/(float numLoops)*100.0
-        printf "\r%i%%" (int pctComplete)
+        let elapsedTime = DateTime.Now.Subtract(startTime) 
+        printf "\r%i%% completed, " (int pctComplete)
+        printRemainingTime pctComplete elapsedTime
     printfn ""
     // Time the entire stresstest
     let elapsedTime = DateTime.Now.Subtract(startTime) 

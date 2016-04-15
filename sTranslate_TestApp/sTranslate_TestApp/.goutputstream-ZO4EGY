@@ -1,4 +1,5 @@
-﻿ex1;lblSomeThing;Id;StartWith;no
+﻿FromText;Context;Property;Criteria;ToLang
+ex1;lblSomeThing;Id;StartWith;no
 ex2;Label;Text;EndWith;no
 wx3;String;ToolTip;Exact;no
 Name;Label;Text;Contains;no
