@@ -4,6 +4,7 @@ open System.IO
 open System.Text
 open HelperFunctions
 open sTranslate_parallel.XltTool
+open FSharpx.Collections.Experimental
 
 let StressTest translateFunction propertyFunction criteriaFunction fileName numLoops = 
     printfn "Using search data in: %s" fileName
@@ -52,24 +53,23 @@ let toSearch (line : string []) =
 
 let StressTestFsParallel fileName numLoops =
     printfn "Using search data in: %s" fileName
-    let startTime = DateTime.Now
+    let startTime = System.DateTime.Now
     // Initialize accumulator variables
-    let mutable loopTimes : List<TimeSpan> = []
+    let mutable loopTimes : List<System.TimeSpan> = []
     // Create string array of each line in the .csv file
-    let lines = System.IO.File.ReadAllLines(fileName, Encoding.GetEncoding("ISO-8859-1"))
+    let lines = System.IO.File.ReadAllLines(fileName, System.Text.Encoding.GetEncoding("ISO-8859-1"))
+    // Make list of searches
+    let searchList = lines |> FlatList.ofSeq |> FlatList.map (fun line -> line.Split([|';'|])) |> FlatList.map toSearch
     // Do the .csv search numLoops number of times
-    let mutable searchList : sTranslate_parallel.XltTool.Search list = []
     for i in 1 .. numLoops do
-        // Make list of searches
-        let searchList = Array.toList lines |> List.map (fun line -> line.Split([|';'|])) |> List.map toSearch
         //get the result
-        let loopStartTime = DateTime.Now
+        let loopStartTime = System.DateTime.Now
         let resultSeq = sTranslate_parallel.XltTool.getToTextAsync searchList
         // Time the individual loop
-        loopTimes <- addToList loopTimes (DateTime.Now.Subtract(loopStartTime))
+        loopTimes <- addToList loopTimes (System.DateTime.Now.Subtract(loopStartTime))
         // Track completion
         let pctComplete = Math.Floor (float i)/(float numLoops)*100.0
-        let elapsedTime = DateTime.Now.Subtract(startTime) 
+        let elapsedTime = System.DateTime.Now.Subtract(startTime) 
         printf "\r%i%% completed, " (int pctComplete)
         printRemainingTime pctComplete elapsedTime
     printfn ""

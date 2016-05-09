@@ -18,7 +18,7 @@ let testFile = __SOURCE_DIRECTORY__ + @"\StressTest.csv"
 let main argv = 
     
     // Call the stresstest
-    let numLoops = 10
+    let numLoops = 100
     let fileName = testFile    
     
 //    let (searchCounter,elapsedTime,loopTimes) = StressTestCsGetToText fileName numLoops
