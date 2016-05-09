@@ -3,6 +3,7 @@ open System
 open System.IO
 open System.Text
 open HelperFunctions
+open sTranslate_parallel.XltTool
 
 let StressTest translateFunction propertyFunction criteriaFunction fileName numLoops = 
     printfn "Using search data in: %s" fileName
@@ -42,33 +43,28 @@ let StressTest translateFunction propertyFunction criteriaFunction fileName numL
     let elapsedTime = DateTime.Now.Subtract(startTime) 
     (searchCounter,elapsedTime,List.rev loopTimes)
 
+let toSearch (line : string []) = 
+    ( { FromText = line.[0]
+        Context = line.[1]
+        Property = line.[2]
+        Criteria = line.[3]
+        ToLang = line.[4] } : Search)
+
 let StressTestFsParallel fileName numLoops =
     printfn "Using search data in: %s" fileName
     let startTime = DateTime.Now
     // Initialize accumulator variables
-    let mutable searchCounter = 0
     let mutable loopTimes : List<TimeSpan> = []
     // Create string array of each line in the .csv file
     let lines = System.IO.File.ReadAllLines(fileName, Encoding.GetEncoding("ISO-8859-1"))
     // Do the .csv search numLoops number of times
     let mutable searchList : sTranslate_parallel.XltTool.Search list = []
     for i in 1 .. numLoops do
+        // Make list of searches
+        let searchList = Array.toList lines |> List.map (fun line -> line.Split([|';'|])) |> List.map toSearch
+        //get the result
         let loopStartTime = DateTime.Now
-        searchList <- []
-        for line in lines do
-            // Get search criteria from the current line
-            let splitLine = line.Split([|';'|])
-            let s : sTranslate_parallel.XltTool.Search = {
-                FromText = splitLine.[0]
-                Context = splitLine.[1]
-                Property = splitLine.[2]
-                Criteria = splitLine.[3]
-                ToLanguageCode = splitLine.[4]
-            }
-            searchList <- addToList searchList s
-            searchCounter <- searchCounter+1
-        //print the result
-        let resultSeq = sTranslate_parallel.XltTool.ToTextBatch searchList
+        let resultSeq = sTranslate_parallel.XltTool.getToTextAsync searchList
         // Time the individual loop
         loopTimes <- addToList loopTimes (DateTime.Now.Subtract(loopStartTime))
         // Track completion
@@ -80,4 +76,4 @@ let StressTestFsParallel fileName numLoops =
     
     // Time the entire stresstest
     let elapsedTime = DateTime.Now.Subtract(startTime) 
-    (searchCounter,elapsedTime,List.rev loopTimes)
+    (elapsedTime,List.rev loopTimes)
