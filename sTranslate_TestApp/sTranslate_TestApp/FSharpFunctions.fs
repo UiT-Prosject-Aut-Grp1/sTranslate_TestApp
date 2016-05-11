@@ -4,7 +4,6 @@ open System.IO
 open System.Text
 open HelperFunctions
 open sTranslate_parallel.XltTool
-open FSharpx.Collections.Experimental
 
 let StressTest translateFunction propertyFunction criteriaFunction fileName numLoops = 
     printfn "Using search data in: %s" fileName
@@ -59,12 +58,13 @@ let StressTestFsParallel fileName numLoops =
     // Create string array of each line in the .csv file
     let lines = System.IO.File.ReadAllLines(fileName, System.Text.Encoding.GetEncoding("ISO-8859-1"))
     // Make list of searches
-    let searchList = lines |> FlatList.ofSeq |> FlatList.map (fun line -> line.Split([|';'|])) |> FlatList.map toSearch
+    let searchList = lines |> List.ofSeq |> List.map (fun line -> line.Split([|';'|])) |> List.map toSearch
     // Do the .csv search numLoops number of times
     for i in 1 .. numLoops do
         //get the result
         let loopStartTime = System.DateTime.Now
-        let resultSeq = sTranslate_parallel.XltTool.getToTextAsync searchList
+        let resultSeq = sTranslate_parallel.XltTool.GetToTextAsync searchList
+        //printfn "%A" resultSeq
         // Time the individual loop
         loopTimes <- addToList loopTimes (System.DateTime.Now.Subtract(loopStartTime))
         // Track completion
