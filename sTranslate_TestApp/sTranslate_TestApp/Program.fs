@@ -18,7 +18,7 @@ let testFile = __SOURCE_DIRECTORY__ + @"\StressTest.csv"
 let main argv = 
     
     // Call the stresstest
-    let numLoops = 100
+    let numLoops = 1000
     let fileName = testFile    
     
 //    let (searchCounter,elapsedTime,loopTimes) = StressTestCsGetToText fileName numLoops
@@ -29,20 +29,12 @@ let main argv =
 //    let logFile = logFileFSharpDirectNoCache
 //    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_direct.XltTool.ToText sTranslate_direct.XltEnums.ToPropertyType sTranslate_direct.XltEnums.ToCriteria fileName numLoops
 //    let logFile = logFileFSharpDirectCache
-//    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_fs.XltTool.GetToText sTranslate_fs.XltEnums.ToPropertyType sTranslate_fs.XltEnums.ToCriteria fileName numLoops
+//    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_fs.XltTool.GetToText sTranslate_fs.XltEnums.toProperty sTranslate_fs.XltEnums.toCriteria fileName numLoops
 //    let logFile = logFileFSharpNoCache
-//    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_fs.XltTool.ToText sTranslate_fs.XltEnums.ToPropertyType sTranslate_fs.XltEnums.ToCriteria fileName numLoops
+//    let (searchCounter,elapsedTime,loopTimes) = StressTest sTranslate_fs.XltTool.GetToText sTranslate_fs.XltEnums.toProperty sTranslate_fs.XltEnums.toCriteria fileName numLoops
 //    let logFile = logFileFSharpCache
-    let (searchCounter,elapsedTime,loopTimes) = StressTestFsParallel fileName numLoops
+    let (elapsedTime,loopTimes) = StressTestFsParallel fileName numLoops
     let logFile = logFileFSharpParallel
-
-//    let fromText = "Edit"
-//    let context = "lblTitle"
-//    let property = sTranslate_fs.XltEnums.ToPropertyType "Id"
-//    let criteria = sTranslate_fs.XltEnums.ToCriteria "Contains"
-//    let toLang = "no"
-//    let toText = sTranslate_fs.XltTool.ToText criteria fromText property context toLang
-//    printfn "%s" toText
 
     printfn "Duration: %A sec" elapsedTime
     
